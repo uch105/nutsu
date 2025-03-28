@@ -1,0 +1,30 @@
+{% extends 'nutsu_app/admin.html' %}
+{% load static %}
+
+{% block title %}
+Create Newsletter
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'create_newsletter' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" class="inputfield" name="title" placeholder="Provide title..." required>
+    <textarea name="description" placeholder="Description..." required></textarea>
+    <input type="text" class="inputfield" name="read_time" placeholder="Read time..." required>
+    <select name="categories" id="">
+        <option value="">--- Select Category ---</option>
+        {% for category in categories %}
+        <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <select name="authors" id="">
+        <option value="">--- Select Authors ---</option>
+        {% for author in authors %}
+        <option value="{{ author.user.full_name }}">{{ author.user.full_name }}</option>
+        {% endfor %}
+    </select>
+    <label for="banner">Upload a banner</label>
+    <input type="file" name="banner" accept=".jpg, .jpeg, .png" required>
+    <input type="submit" class="submit-btn" value="Create">
+</form>
+{% endblock%}

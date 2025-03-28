@@ -1,0 +1,108 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block title %}
+NUTSU Technologies
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="first-container">
+    <div class="content">
+        <h1>NUTSU Technologies</h1>
+        <p>Shaping Ideas, Crafting The Future</p>
+        <a href="{% url 'projects' %}">Explore Us</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <h1>What We Offer?</h1>
+        <div class="offerings">
+            <div class="two-offer">
+                <p class="offer">
+                    Large E-Commerce Solutions
+                </p>
+                <p class="offer">
+                    Free Portfolio Website Builder
+                </p>
+            </div>
+            <div class="two-offer">
+                <p class="offer">
+                    Waste Management Solutions
+                </p>
+                <p class="offer">
+                    Custom E-Learning Solutions
+                </p>
+            </div>
+            <div class="two-offer">
+                <p class="offer">
+                    Advanced R & D Solutions
+                </p>
+                <p class="offer">
+                    Innovative Robotics Solutions
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <h1>What Our Customers Say?</h1>
+        <div class="reviews-container">
+            <div class="reviews">
+                <div class="review">
+                    <img src="{% static 'images/reviewer1.jpg' %}" alt="Reviewer 1">
+                    <h3>Tanvir Saklan(Dummy)</h3>
+                    <p>Software Engineer, Google</p>
+                    <blockquote>"Great experience with this product! Highly recommend."</blockquote>
+                </div>
+                <div class="review">
+                    <img src="{% static 'images/reviewer1.jpg' %}" alt="Reviewer 1">
+                    <h3>Tanvir Saklan(Dummy)</h3>
+                    <p>Software Engineer, Google</p>
+                    <blockquote>"Great experience with this product! Highly recommend.Great experience with this product! Highly recommend."</blockquote>
+                </div>
+            </div>
+        </div>        
+    </div>   
+</div>
+
+<div class="container">
+    <div class="content">
+        <h1>Partners</h1>
+        <div class="partners">
+            <img src="{% static 'images/sslcommerz.png' %}" alt="SSLCommerz Logo">
+            <img src="{% static 'images/kamrulacademy.png' %}" alt="Kamrul Academy Logo">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="content">
+        <h1>Contact</h1>
+        <form action="{% url 'home' %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <input type="text" class="inputfield" name="name" placeholder="Your Name">
+                <input type="text" class="inputfield" name="email" placeholder="Your e-mail/whatsapp no.">
+            </div>
+            <textarea type="text" class="inputfield" name="text" placeholder="Your Message"></textarea>
+            <input type="submit" class="submit-btn" value="Send Message">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

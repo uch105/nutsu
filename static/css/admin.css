@@ -1,0 +1,49 @@
+html, body, input{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+}
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav img{
+    width: auto;
+    height: 50px;
+    padding: 20px 0px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.inputfield{
+    width: 300px;
+    padding: 15px;
+    background-color: #ffffff;
+    color: #282828;
+    border: 0.5px solid rgba(40, 40, 40, 0.15);
+    border-radius: 5px;
+}
+textarea{
+    width: 300px;
+    height: 150px;
+    padding: 15px;
+    background-color: #ffffff;
+    color: #282828;
+    border: 0.5px solid rgba(40, 40, 40, 0.15);
+    border-radius: 5px;
+}
+.submit-btn{
+    width: 300px;
+    padding: 15px;
+    background-color: #282828;
+    color: #ffffff;
+    border: 0.5px solid rgba(40, 40, 40, 0.15);
+    border-radius: 5px;
+}

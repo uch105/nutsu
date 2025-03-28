@@ -1,0 +1,40 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
+{% block title %}
+Projects - NUTSU Technologies
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Projects by NUTSU Team</h1>
+    <p>NUTSU Technologies has done several projects. NUTSU Team is capable of delivering cutting-edge technology with a lifetime support of a project.</p>
+    <div class="projects">
+        <div class="project">
+            <img src="{% static 'images/kamrulacademy.png' %}" alt="Kamrul Academy">
+            <h4>Kamrul Academy</h4>
+            <p>Kamrul Academy is an E-learning platform which was developed by our team.</p>
+            <a href="https://kamrulacademy.com/">Visit them</a>
+        </div>
+        <div class="project">
+            <img src="{% static 'images/mse.png' %}" alt="Kamrul Academy">
+            <h4>Materials Science Hub</h4>
+            <p>Materials Science Hub is a platform for engineers from Materials Science across the world.</p>
+            <a href="https://materialsscience.net/">Visit them</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

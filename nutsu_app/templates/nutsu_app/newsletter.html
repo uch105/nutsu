@@ -1,0 +1,76 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/newsletter.css' %}">
+{% endblock %}
+
+{% block title %}
+Newsletter - NUTSU Technologies
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<button class="filter_button" onclick="toggletext()" id="filter_button">Show Filters</button>
+<div class="filter-box" id="filters" style="display: none;">
+    <form action="{% url 'newsletter' %}" method="POST" class="filterform">
+        {% csrf_token %}
+        <label><input type="checkbox" name="search_news" class="checkboxinput" value="last_week">Last week</label>
+        <label><input type="checkbox" name="search_news" class="checkboxinput" value="last_month">Last month</label>
+        {% for category in categories %}
+        <label><input type="checkbox" name="search_news" class="checkboxinput" value="{{ category.name }}">{{ category.name }}</label>
+        {% endfor %}
+        <input type="submit" value="Search Filter" class="submit-btn">
+    </form>
+    <form action="{% url 'newsletter' %}" method="GET" class="filterform">
+        {% csrf_token %}
+        <input type="text" class="inputfield" name="search_text" placeholder="Search by text">
+        <input type="submit" value="Search" class="submit-btn">
+    </form>
+</div>
+
+<div class="newsletters">
+    {% for newsletter in newsletters %}
+    <a class="newsletter" href="{% url 'news' pk=newsletter.id %}">
+        <div class="image">
+            <img src="{{ newsletter.banner.url }}" alt="">
+        </div>
+        <div class="content">
+            <h4 class="title">{{ newsletter.title }}</h4>
+            <p class="desc">
+                {% if newsletter.description|length > 160 %}
+                {{ newsletter.description|slice:":160" }}...
+                {% else %}
+                    {{ newsletter.description }}
+                {% endif %}
+            </p>
+            <p class="timestamp">Published: {{ newsletter.published_at|date:"d-m-Y h:ia" }}
+            </p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block body_lower_scripts %}
+<script>
+    function toggletext(){
+        let filter_button = document.getElementById("filter_button");
+        let filterbox = document.getElementById("filters");
+
+        if (filterbox.style.display === "none") {
+            filterbox.style.display = "block";
+            filter_button.textContent = "Hide Filters";
+        } else {
+            filterbox.style.display = "none";
+            filter_button.textContent = "Show Filters";
+        }
+    }
+</script>
+{% endblock %}

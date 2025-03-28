@@ -1,0 +1,13 @@
+{% load static %}
+<nav>
+    <div class="logo-container">
+        <a href="{% url 'home' %}"><img src="{% static 'images/logo1000b.png' %}" alt="NUTSU Technologies"></a>
+    </div>
+    <div class="link-container">
+        <ul>
+            <li><a href="{% url 'projects' %}" {% if "/projects/" in request.path %} class="active"{% endif %}>Projects</a></li>
+            <li><a href="{% url 'newsletter' %}" {% if "/newsletter/" in request.path %} class="active"{% endif %}>Newsletter</a></li>
+            <li><a href="{% url 'about' %}" {% if "/about/" in request.path %} class="active"{% endif %}>About Us</a></li>
+        </ul>
+    </div>
+</nav>

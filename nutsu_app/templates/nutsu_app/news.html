@@ -1,0 +1,48 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block title %}
+{{ news.title }}
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="news-header">
+        <div>
+            <h3>{{ news.title }}</h3>
+            <p>Author: {{ news.author.user.full_name }} <br>Published: {{ news.published_at|date:"d-m-Y h:ia" }} <br>Time to read: {{ news.read_time }} mins</p>
+        </div>
+        <div>
+            <img src="{{ news.banner.url }}" alt="">
+        </div>
+    </div>
+    <div class="blocks">
+        {% for block in news.blocks.all %}
+        <div class="block">
+            <p>
+                {{ block.text|safe }}
+            </p>
+            {% if block.image %}
+            <div>
+                <img src="{{ block.image.url }}" alt="">
+                <p>Source: {{ block.image_source_text }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'nutsu_app/admin.html' %}
+{% load static %}
+
+{% block title %}
+Create Newsletter Block
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'create_newsletter_block' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" class="inputfield" name="id" placeholder="Provide news id...">
+    <textarea name="description" placeholder="Body text..."></textarea>
+    <label for="banner">Upload an image</label>
+    <input type="file" name="image" accept=".jpg, .jpeg, .png">
+    <input type="text" class="inputfield" name="image_source" placeholder="Image Source Text">
+    <input type="submit" class="submit-btn" value="Create Block">
+</form>
+{% endblock%}

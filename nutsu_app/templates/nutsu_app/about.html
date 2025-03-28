@@ -1,0 +1,35 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block title %}
+About - NUTSU Technologies
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <p class="mv">
+        <strong>Mission*</strong><br>
+        To empower individuals and businesses through innovative technology solutions, enabling them to achieve their full potential in a digital world. <br>
+        <strong>Vision*</strong><br>
+        To become the leading provider of accessible, reliable, and future-proof technology that seamlessly integrates into everyday life, bridging hardware & software, driving positive societal impact.
+    </p>
+    <h4>Founder</h4>
+    <img src="{% static 'images/founder.jpg' %}" alt="Tanvir Saklan">
+    <p class="speech">
+        Hello, I am Tanvir Saklan, a passionate computer programmer. I have graduated from Dept. of Materials Science & Engineering, University of Rajshahi. All through my engineering journey, i always wanted to be an STEM engineer, as i love to work with hardware & software both. However, after many trial & error, after lots of learning, i founded my own company. I am always eager to face challenges and enjoy solving problems. With a clear mindset to the betterment of the environment, i focus on achieving engineering excellence. So, welcome to this company and let me or my team know what you want. This company is always there for you.
+    </p>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}
