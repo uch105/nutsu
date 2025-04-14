@@ -102,7 +102,7 @@ def create_newsletter(request):
         banner = request.FILES["banner"]
         read_time = request.POST.get("read_time",'')
 
-        newsletter = Newsletter.objects.create(id=id,title=title,description=description,author=Author.objects.filter(user=CustomUser.objects.filter(full_name=author_name)[0])[0],banner=banner,read_time=read_time)
+        newsletter = Newsletter.objects.create(id=id,title=title,description=description,author=Author.objects.get(user=User.objects.get(id=author_name)),banner=banner,read_time=read_time)
         newsletter.categories.set(Category.objects.filter(name__in=categories))
         return redirect("create_newsletter")
     categories = Category.objects.all()

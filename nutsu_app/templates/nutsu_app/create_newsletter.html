@@ -20,7 +20,7 @@ Create Newsletter
     <select name="authors" id="">
         <option value="">--- Select Authors ---</option>
         {% for author in authors %}
-        <option value="{{ author.user.full_name }}">{{ author.user.full_name }}</option>
+        <option value="{{ author.user.id }}">{{ author.user.first_name }} {{ author.user.last_name }}</option>
         {% endfor %}
     </select>
     <label for="banner">Upload a banner</label>

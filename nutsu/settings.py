@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'nutsu.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'database',
     }
 }
 
@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'nutsu_app.CustomUser'
+#AUTH_USER_MODEL = 'nutsu_app.CustomUser'
 
 
 # Internationalization
