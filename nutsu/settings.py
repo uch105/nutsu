@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+LOG_DIR = os.path.join(BASE_DIR, 'request_logs')
+os.makedirs(LOG_DIR, exist_ok=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -103,6 +107,35 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 #AUTH_USER_MODEL = 'nutsu_app.CustomUser'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'custom': {
+            'format': '[{asctime}] {levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'daily_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, 'access.log'),
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,
+            'formatter': 'custom',
+        },
+    },
+    'loggers': {
+        'request_logger': {
+            'handlers': ['daily_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
 
 
 # Internationalization

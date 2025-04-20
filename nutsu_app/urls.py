@@ -25,4 +25,5 @@ else:
         path('admin/create/newsletter/block/',views.create_newsletter_block,name="create_newsletter_block"),
         path('queries/', views.query_list, name='query_list'),
         path('load-more-queries/', views.load_more_queries, name='load_more_queries'),
+        path('download-today-log/',views.download_today_log,name="download-today-log"),
     ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

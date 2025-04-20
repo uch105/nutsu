@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -170,6 +170,10 @@ def load_more_queries(request):
 
 def terms_privacy(request):
     return render(request,'nutsu_app/terms_privacy.html')
+
+def download_today_log(request):
+    path = os.path.join(settings.LOG_DIR, 'access.log')
+    return FileResponse(open(path, 'rb'), as_attachment=True, filename='access.log')
 
 def create_invoice(request):
     return render(request,"nutsu_app/create_invoice.html")
