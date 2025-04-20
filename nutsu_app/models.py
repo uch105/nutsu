@@ -18,6 +18,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Service(models.Model):
+    name = models.CharField(max_length=100,unique=True)
+    redirection_url = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 class Author(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="authors", blank=True, null=True)
@@ -77,3 +84,34 @@ class Query(models.Model):
 
     def __str__(self):
         return self.name
+    
+class ConsultedCustomer(models.Model):
+    username = models.CharField(max_length=200,primary_key=True)
+    name = models.CharField(max_length=50,null=False,blank=False)
+    email = models.CharField(max_length=50,null=False,blank=False)
+    phone = models.CharField(max_length=50,null=False,blank=False)
+    address = models.CharField(max_length=100,null=True,blank=True)
+    occupation = models.CharField(max_length=100,null=True,blank=True)
+
+    def __str__(self):
+        return self.name
+    
+class Payment(models.Model):
+    invoice_no = models.CharField(max_length=200, unique=True)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    username = models.CharField(max_length=500, null=True, blank=True)
+    status = models.BooleanField(default=False)
+    creation_timestamp = models.DateTimeField(auto_now_add=True)
+    amount = models.CharField(max_length=100, blank=True, null=True)
+    trxID = models.CharField(max_length=200, unique=True)
+    sessionkey = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.service.name
+    
+class BadPayment(models.Model):
+    logdetails = models.TextField()
+    creation_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.creation_timestamp + " - " + self.logdetails[:30]

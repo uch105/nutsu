@@ -1,0 +1,33 @@
+.checkout{
+    padding: 20px 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.checkout p{
+    max-width: 600px;
+}
+.checkout img{
+    max-width: 600px;
+    height: auto;
+}
+.checkout .agree{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.checkout > button, .checkout > a{
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--light-color);
+    background-color: var(--dark-color);
+    border-radius: 5px;
+    padding: 10px 30px;
+}
+.checkout .hide{
+    display: none;
+}

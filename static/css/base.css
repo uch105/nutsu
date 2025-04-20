@@ -3,6 +3,7 @@
     --light-color: #ffffff;
     --box-shadow-one: 4px 4px 4px 0 rgba(40, 40, 40, 0.15);
     --box-shadow-two: 4px 4px 4px 4px rgba(40, 40, 40, 0.5);
+    --border: 0.5px solid rgba(40,40,40,0.1);
 }
 html,body{
     margin: 0;
@@ -123,6 +124,13 @@ footer > .footer-social-links img{
     width: 25px;
     height: 25px;
 }
+footer > a {
+    text-align: center;
+}
+footer > a > img {
+    width: 500px;
+    height: auto;
+}
 
 @media screen and (max-width: 500px){
     .logo-container img{
@@ -130,6 +138,9 @@ footer > .footer-social-links img{
     }
     .link-container ul{
         gap: 20px;
+    }
+    footer > a > img {
+        width: 90%;
     }
 }
 
@@ -151,7 +162,7 @@ footer > .footer-social-links img{
     color: #d4edda;
     border: 1px solid #c3e6cb;
 }
-.error {
+.error, .warning {
     background-color: #721c24;
     color: #f8d7da;
     border: 1px solid #f5c6cb;

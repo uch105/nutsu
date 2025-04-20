@@ -86,9 +86,10 @@
     border-radius: 50%;
 }
 .partners{
+    padding-top: 50px;
     display: grid;
     grid-template-columns: 300px;
-    gap: 20px;
+    gap: 50px;
     justify-content: center;
     align-items: center;
 }

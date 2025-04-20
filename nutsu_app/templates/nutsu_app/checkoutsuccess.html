@@ -1,0 +1,28 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+{% endblock %}
+
+{% block title %}
+Success!
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="checkout">
+    <p>Congratulations, {{ name }}! <br>
+        You have successfully paid {{ amount }} BDT for our concern service - {{ service }} <br>
+        You can now go back and enjoy our service without interruption! Thank You!
+    </p>
+    <a href="{{ redirection_url }}">Go Back</a>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block title %}
+Checkout Page
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="checkout">
+    <h4>Invoice no: {{ invoice_no }}</h4>
+    <p>Dear valued customer, you are using our concern product named "{{ service }}"<br>
+        Your username appears to be "{{ username }}" <br>
+        You are going to pay an amount of "{{ amount }}" BDT.
+        We recommend saving your Invoice id.
+    </p>
+    {% if service and username and amount %}
+    <div class="agree">
+        <input type="checkbox" name="agree" id="check" onchange="document.getElementById('proceed').disabled = !this.checked;">
+        <label for="agree">I agree to <a href="{% url 'terms_privacy' %}">Terms & Conditions</a> and also <a href="{% url 'terms_privacy' %}">Privacy Policy</a></label>
+    </div>
+    <button disabled id="proceed" onclick="document.getElementById('pay').classList.remove('hide')">Proceed to payment</button>
+    <a href="{% url 'payment' pk0=service pk1=username pk2=amount pk3=invoice_no %}" id="pay" class="hide">Pay</a>
+    {% else %}
+    <p>Looks like you are being smart! Please don't be.</p>
+    {% endif %}
+    <img src="{% static 'images/PaymentBanner1.png' %}" alt="SSLCommerz">
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

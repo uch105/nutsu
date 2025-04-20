@@ -1,0 +1,28 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+{% endblock %}
+
+{% block title %}
+Cancelled!
+{% endblock %}
+
+{% block head_scripts %}
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="checkout">
+    <p>Dear {{ name }}! <br>
+        You have cancelled the payment of {{ amount }} BDT for our concern service - {{ service }} <br>
+        If you are having trouble in making payment, please contact us!
+    </p>
+    <a href="{{ redirection_url }}">Go Back</a>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}
