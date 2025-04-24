@@ -26,4 +26,6 @@ else:
         path('queries/', views.query_list, name='query_list'),
         path('load-more-queries/', views.load_more_queries, name='load_more_queries'),
         path('download-today-log/',views.download_today_log,name="download-today-log"),
+        #portfolio
+        path('portfolio/uch/',views.uch,name='uch')
     ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
