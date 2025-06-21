@@ -16,93 +16,114 @@ NUTSU Technologies
 {% endblock %}
 
 {% block body %}
-<div class="first-container">
-    <div class="content">
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
         <h1>NUTSU Technologies</h1>
         <p>Shaping Ideas, Crafting The Future</p>
-        <a href="{% url 'projects' %}">Explore Us</a>
+        <a href="{% url 'projects' %}" class="btn">Explore Us</a>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <div class="content">
-        <h1>What We Offer?</h1>
+<!-- Services Section -->
+<section class="services">
+    <div class="container">
+        <div class="section-heading">
+            <h1>What We Offer</h1>
+        </div>
         <div class="offerings">
-            <div class="two-offer">
-                <p class="offer">
-                    Large E-Commerce Solutions
-                </p>
-                <p class="offer">
-                    Free Portfolio Website Builder
-                </p>
+            <div class="offer">
+                <h3>Large E-Commerce Solutions</h3>
+                <p>Complete online store solutions tailored to your business needs.</p>
             </div>
-            <div class="two-offer">
-                <p class="offer">
-                    Waste Management Solutions
-                </p>
-                <p class="offer">
-                    Custom E-Learning Solutions
-                </p>
+            <div class="offer">
+                <h3>Free Portfolio Website Builder</h3>
+                <p>Showcase your work with our easy-to-use portfolio platform.</p>
             </div>
-            <div class="two-offer">
-                <p class="offer">
-                    Advanced R & D Solutions
-                </p>
-                <p class="offer">
-                    Innovative Robotics Solutions
-                </p>
+            <div class="offer">
+                <h3>Waste Management Solutions</h3>
+                <p>Innovative tech solutions for sustainable waste management.</p>
+            </div>
+            <div class="offer">
+                <h3>Custom E-Learning Solutions</h3>
+                <p>Interactive learning platforms for educational institutions.</p>
+            </div>
+            <div class="offer">
+                <h3>Advanced R & D Solutions</h3>
+                <p>Cutting-edge research and development services.</p>
+            </div>
+            <div class="offer">
+                <h3>Innovative Robotics Solutions</h3>
+                <p>Automation and robotics for modern industries.</p>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <div class="content">
-        <h1>What Our Customers Say?</h1>
-        <div class="reviews-container">
-            <div class="reviews">
-                <div class="review">
-                    <img src="{% static 'images/reviewer1.jpg' %}" alt="Reviewer 1">
-                    <h3>Tanvir Saklan(Dummy)</h3>
-                    <p>Software Engineer, Google</p>
-                    <blockquote>"Great experience with this product! Highly recommend."</blockquote>
-                </div>
-                <div class="review">
-                    <img src="{% static 'images/reviewer1.jpg' %}" alt="Reviewer 1">
-                    <h3>Tanvir Saklan(Dummy)</h3>
-                    <p>Software Engineer, Google</p>
-                    <blockquote>"Great experience with this product! Highly recommend.Great experience with this product! Highly recommend."</blockquote>
-                </div>
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-heading">
+            <h1>What Our Customers Say</h1>
+        </div>
+        <div class="reviews">
+            {% for review in reviews %}
+            <div class="review">
+                <img src="{{ review.image.url }}" alt="Reviewer image">
+                <h3>{{ review.name }}</h3>
+                <p class="position">{{ review.position }}</p>
+                <blockquote>"{{ review.quote|safe }}"</blockquote>
             </div>
-        </div>        
-    </div>   
-</div>
-
-<div class="container">
-    <div class="content">
-        <h1>Partners</h1>
-        <div class="partners">
-            <a href="http://www.sslwireless.com/"><img src="{% static 'images/sslcommerz.png' %}" alt="SSLCommerz Logo"></a>
-            <a href="https://kamrulacademy.com/"><img src="{% static 'images/kamrulacademy.png' %}" alt="Kamrul Academy Logo"></a>
-            <a href="https://materialsscience.net/"><img src="{% static 'images/mse.png' %}" alt="Materials Science Hub"></a>
+            {% empty %}
+            <p style="text-align: center;">No reviews yet</p>
+            {% endfor %}
         </div>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <div class="content">
-        <h1>Contact</h1>
-        <form action="{% url 'home' %}" method="POST">
+<!-- Partners Section -->
+<section class="partners">
+    <div class="container">
+        <div class="section-heading">
+            <h1>Our Partners</h1>
+        </div>
+        <div class="partner-logos">
+            <a href="http://www.sslwireless.com/">
+                <img src="{% static 'images/sslcommerz.png' %}" alt="SSLCommerz">
+            </a>
+            <a href="https://kamrulacademy.com/">
+                <img src="{% static 'images/kamrulacademy.png' %}" alt="Kamrul Academy">
+            </a>
+            <a href="https://materialsscience.net/">
+                <img src="{% static 'images/mse.png' %}" alt="Materials Science Hub">
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <div class="container">
+        <div class="section-heading">
+            <h1>Get In Touch</h1>
+        </div>
+        <form class="contact-form" action="{% url 'home' %}" method="POST">
             {% csrf_token %}
-            <div>
-                <input type="text" class="inputfield" name="name" placeholder="Your Name">
-                <input type="text" class="inputfield" name="email" placeholder="Your e-mail/whatsapp no.">
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="email" placeholder="Your Email/WhatsApp" required>
+                </div>
             </div>
-            <textarea type="text" class="inputfield" name="text" placeholder="Your Message"></textarea>
-            <input type="submit" class="submit-btn" value="Send Message">
+            <div class="form-group">
+                <textarea name="text" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
         </form>
     </div>
-</div>
+</section>
 {% endblock %}
 
 {% block body_lower_scripts %}

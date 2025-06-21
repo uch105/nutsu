@@ -1,0 +1,68 @@
+{% extends 'nutsu_app/base.html' %}
+{% load static %}
+
+{% block head_links %}
+{% endblock %}
+
+{% block title %}
+Review Section
+{% endblock %}
+
+{% block head_scripts %}
+<style>
+    .review{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .review-form-box{
+        margin: 20px 0px;
+        padding: 10px;
+        border-radius: 15px;
+        background-color: var(--light-color);
+        box-shadow: var(--box-shadow-one);
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+    .inputfield,textarea{
+        width: 500px;
+    }
+    textarea{
+        height: 300px;
+    }
+    @media screen and (max-width:600px){
+        .inputfield,textarea{
+            width: 300px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body_upper_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="review">
+    <div class="review-form-box">
+        <h3 style="text-align: center;">Customer review section</h3>
+        <form action="{% url 'review' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" class="inputfield" name="name" placeholder="Enter your name" required>
+            <input type="text" class="inputfield" name="position" placeholder="Position & company name e.g CEO, NUTSU Technologies" required>
+            <p>Your image: </p>
+            <input type="file" name="image" id="" required>
+            <textarea name="quote" placeholder="Write a review" id="" required></textarea>
+            <input type="submit" class='submit-btn' value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_lower_scripts %}
+{% endblock %}

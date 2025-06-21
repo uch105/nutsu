@@ -21,7 +21,7 @@ class Category(models.Model):
     
 class Service(models.Model):
     name = models.CharField(max_length=100,unique=True)
-    redirection_url = models.TextField()
+    redirection_url = models.TextField(null=True)
 
     def __str__(self):
         return self.name
@@ -110,8 +110,18 @@ class Payment(models.Model):
         return self.service.name
     
 class BadPayment(models.Model):
-    logdetails = models.TextField()
+    logdetails = models.TextField(null=True)
     creation_timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.creation_timestamp + " - " + self.logdetails[:30]
+
+class Review(models.Model):
+    name = models.CharField(max_length=255, null=True)
+    position = models.CharField(max_length=512, null=True)
+    quote = models.TextField(null=True)
+    image = models.ImageField(upload_to='reviewers/',null=True)
+    allowed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.name} -- {self.position}"

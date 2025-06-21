@@ -8,6 +8,8 @@ from .models import *
 from .payment import *
 import random
 import string
+from automail import send_automail
+from autosms import send_autosms
 
 def generate_unique_id(prefix="id_", length=16, include_uppercase=True, include_lowercase=True, include_numbers=True, include_special=True):
     if length <= len(prefix):
@@ -51,14 +53,14 @@ def maintainance_view_all(request,path):
     return render(request, 'nutsu_app/maintainance.html')
 
 def get_customer_info(service,username):
-    if service=='consultancy':
+    if service=='self':
         customer = ConsultedCustomer.objects.get(username=username)
         customer_info = {
             'name': customer.name,
             'email': customer.email,
             'phone': customer.phone,
         }
-    return customer_info
+        return customer_info
 
 def home(request):
     if request.method == "POST":
@@ -69,9 +71,15 @@ def home(request):
         Query.objects.create(name=name, email=email, text=text)
         messages.success(request, "Query received, we will contact soon!")
         return redirect("home")
+    
+    reviews = Review.objects.filter(allowed=True)
+
+    context = {
+        'reviews': reviews,
+    }
 
 
-    return render(request,"nutsu_app/index.html")
+    return render(request,"nutsu_app/index.html",context)
 
 def projects(request):
     return render(request,"nutsu_app/projects.html")
@@ -159,6 +167,17 @@ def create_newsletter_block(request):
 
     return render(request,"nutsu_app/create_newsletter_block.html")
 
+def review(request):
+    if request.method == "POST":
+        name = request.POST.get("name",'')
+        position = request.POST.get("position",'')
+        quote = request.POST.get("quote",'')
+        image = request.FILES('image')
+        Review.objects.create(name=name,position=position,image=image,quote=quote)
+        messages.success(request, "Review received, Thank you!")
+        return redirect("home")
+    return render(request, 'nutsu_app/review.html')
+
 @login_required
 def query_list(request):
     latest_queries = Query.objects.order_by('-id')[:10]
@@ -175,7 +194,26 @@ def download_today_log(request):
     path = os.path.join(settings.LOG_DIR, 'access.log')
     return FileResponse(open(path, 'rb'), as_attachment=True, filename='access.log')
 
+@login_required
 def create_invoice(request):
+    if request.method == "POST":
+        name = request.POST.get("name",'')
+        email = request.POST.get("email",'')
+        phone = request.POST.get("phone",'')
+        amount = request.POST.get('amount','')
+        customer = ConsultedCustomer.objects.create(username=generate_unique_id(prefix='consulted_'),name=name, email=email, phone=phone)
+        
+        subject = "NUTSU Technologies Support"
+        body = f"Dear {name}\n\nWe hope this message finds you well. As discussed in our consultation, we are happy to welcome you with our service. We have created an invoice, so that you can pay via our secured payment channel. Your Payment link is \n\nhttps://nutsutechnologies.com/checkout/?service=self&username={customer.username}&amount={amount}\n\nThank you for choosing us!\n\nSincerely,\nSales Team\nNUTSU Technologies"
+
+        msg = f"Dear {name}, your Payment link is \n\nhttps://nutsutechnologies.com/checkout/?service=self&username={customer.username}&amount={amount}\n\nThank you - NUTSU Technologies"
+        sms_status = send_autosms(to=phone,msg=msg)
+        email_status = send_automail(to_email=email, subject=subject, body=body, html_body=None)
+        if sms_status and email_status:
+            messages.success(request, "Success")
+        else:
+            messages.error(request, 'Error sending email/sms')
+        return redirect("create_invoice")
     return render(request,"nutsu_app/create_invoice.html")
 
 def checkout(request):
@@ -213,11 +251,11 @@ def checkout(request):
 def create_payment(request,pk0,pk1,pk2,pk3):
     service, username, amount, invoice_no = pk0, pk1, pk2, pk3
 
-    customer_info = get_customer_info(service=service,username=username)
+    customer_infoo = get_customer_info(service=service,username=username)
 
     tran_id = generate_transactionID()
 
-    payment_url,sessionkey = create_get_session(tran_id=tran_id,service=service,username=username,amount=amount,name=customer_info["name"],email=customer_info["email"],phone=customer_info["phone"])
+    payment_url,sessionkey = create_get_session(tran_id=tran_id,service=service,username=username,amount=amount,name=customer_infoo["name"],email=customer_infoo["email"],phone=customer_infoo["phone"])
 
     payment_instance = Payment.objects.get(invoice_no=invoice_no)
     payment_instance.trxID = tran_id
