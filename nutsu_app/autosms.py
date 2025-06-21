@@ -10,7 +10,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'prescribemate.settings')
 django.setup()
 
 import requests
-from cleanphonenumber import normalize_bd_phone_number
+from .cleanphonenumber import normalize_bd_phone_number
 
 url = "https://api.sms.net.bd/sendsms"
 
