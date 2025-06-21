@@ -172,7 +172,7 @@ def review(request):
         name = request.POST.get("name",'')
         position = request.POST.get("position",'')
         quote = request.POST.get("quote",'')
-        image = request.FILES('image')
+        image = request.FILES['image']
         Review.objects.create(name=name,position=position,image=image,quote=quote)
         messages.success(request, "Review received, Thank you!")
         return redirect("home")

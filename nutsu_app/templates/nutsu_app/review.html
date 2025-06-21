@@ -51,12 +51,12 @@ Review Section
 <div class="review">
     <div class="review-form-box">
         <h3 style="text-align: center;">Customer review section</h3>
-        <form action="{% url 'review' %}" method="POST">
+        <form action="{% url 'review' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" class="inputfield" name="name" placeholder="Enter your name" required>
             <input type="text" class="inputfield" name="position" placeholder="Position & company name e.g CEO, NUTSU Technologies" required>
-            <p>Your image: </p>
-            <input type="file" name="image" id="" required>
+            <p>Your image: ( Recommended 1:1 sized picture )</p>
+            <input type="file" name="image" id="" accept="image/*" required>
             <textarea name="quote" placeholder="Write a review" id="" required></textarea>
             <input type="submit" class='submit-btn' value="Submit">
         </form>
