@@ -72,7 +72,7 @@ NUTSU Technologies
                 <img src="{{ review.image.url }}" alt="Reviewer image">
                 <h3>{{ review.name }}</h3>
                 <p class="position">{{ review.position }}</p>
-                <blockquote>"{{ review.quote|safe }}"</blockquote>
+                <blockquote>{{ review.quote|safe }}</blockquote>
             </div>
             {% empty %}
             <p style="text-align: center;">No reviews yet</p>
