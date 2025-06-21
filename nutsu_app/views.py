@@ -8,8 +8,8 @@ from .models import *
 from .payment import *
 import random
 import string
-from automail import send_automail
-from autosms import send_autosms
+from .automail import send_automail
+from .autosms import send_autosms
 
 def generate_unique_id(prefix="id_", length=16, include_uppercase=True, include_lowercase=True, include_numbers=True, include_special=True):
     if length <= len(prefix):
