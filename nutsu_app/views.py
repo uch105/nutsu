@@ -208,7 +208,7 @@ def create_invoice(request):
 
         msg = f"Dear {name}, your Payment link is \n\nhttps://nutsutechnologies.com/checkout/?service=self&username={customer.username}&amount={amount}\n\nThank you - NUTSU Technologies"
         sms_status = send_autosms(to=phone,msg=msg)
-        email_status = send_automail(to_email=email, subject=subject, body=body, html_body=None)
+        email_status = send_automail(to_email=[email,], subject=subject, body=body, html_body=None)
         if sms_status and email_status:
             messages.success(request, "Success")
         else:
