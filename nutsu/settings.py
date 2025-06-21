@@ -29,7 +29,7 @@ os.makedirs(LOG_DIR, exist_ok=True)
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['*',]
 
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'nutsu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'database',
+        'ENGINE': 'django.db.backends.postgresql',
+		'NAME': config('DB_NAME'),
+		'USER': config('DB_USER'),
+		'PASSWORD': config('DB_PASSWORD'),
+		'HOST': '127.0.0.1',
+		'PORT': '6432',  # PgBouncer port
     }
 }
 
